@@ -1,0 +1,22 @@
+<div>
+    <a class="back-btn btn-floating btn-large waves-effect waves-light red" routerLink="">
+        <i class="material-icons">keyboard_arrow_left</i>
+    </a>
+</div>
+<div>
+    <form class="todoform" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+        <h5>Create new todo</h5>
+        <label for="name">Name: </label>
+        <input id="name" type="text" formControlName="name">
+
+        <label for="description">Description: </label>
+        <input id="description" type="text" formControlName="description">
+
+        <label for="dueIn">Due in hours: </label>
+        <input id="dueIn" type="number" formControlName="dueIn" min="1">
+
+        <div class="btn-container">
+            <button class="waves-effect waves-light btn red" type="submit"><i class="material-icons left">save</i>Save</button>
+        </div>
+    </form>
+</div>

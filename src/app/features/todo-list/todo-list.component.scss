@@ -1,0 +1,36 @@
+.todo-list {
+    width: 70%;
+    margin: 20px auto;
+    .card.horizontal {
+        word-wrap: break-word;
+        overflow: hidden;
+
+        .card-header p {
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            margin: 10px;
+        }
+        .status {
+            padding: 5px;
+            border:1px solid transparent;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+    }
+    .row-buttons {
+        float: right;
+        margin: 10px 10px;
+        .row-btn {
+            margin-left: 5px;
+        }
+    }
+
+}
+.add-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 50px;
+}

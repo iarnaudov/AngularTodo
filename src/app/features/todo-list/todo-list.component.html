@@ -1,0 +1,50 @@
+<div>
+    <a class="add-btn btn-floating btn-large waves-effect waves-light red" routerLink="form">
+        <i class="material-icons">add</i>
+    </a>
+</div>
+
+<div class="todo-list">
+    <div class="row">
+        <div class="col s3" *ngFor="let todo of todos">
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-header">
+                        <p>{{todo.name}}</p>
+                    </div>
+                    <div class="card-content">
+                        <p>{{todo.description}}</p>
+                    </div>
+                    <div>
+                        <div class="row-buttons row">
+                            <a class="row-btn btn-floating btn-medium waves-effect waves-light red" (click)="this.deleteTodo(todo)">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-action col s12">
+                        <div class="row">
+                            <div class="col s5">
+                                {{todo.dueDate}}
+                            </div>
+                            <div class="col s5">
+                                <button class="waves-effect waves-light btn btn-small {{todo.statusCss}}">{{todo.status}}</button>
+                            </div>
+                            <div class="col s2">
+                                <label *ngIf="todo.isDone" >
+                                    <input type="checkbox" checked="checked" (click)="this.completeTodo(todo)" />
+                                    <span> </span>
+                                </label>
+                                <label *ngIf="!todo.isDone" >
+                                    <input type="checkbox" (click)="this.completeTodo(todo)"/>
+                                    <span> </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
