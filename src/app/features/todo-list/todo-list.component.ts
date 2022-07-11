@@ -21,11 +21,11 @@ export class TodoListComponent implements OnInit {
     private todoService: TodoService,
     private statusService: StatusService) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.getTodos();
   }
 
-  public deleteTodo(todo: ITodoViewModel) {
+  public deleteTodo(todo: ITodoViewModel): void {
     // "A task that is not yet completed and not past the due date should be able to be deleted."
     if (todo.status == Status.Completed || todo.status == Status.Overdue) {
       M.toast({ html: "You cannot delete this task. It is either completed or overdue!" });
@@ -37,7 +37,7 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  public completeTodo(todo: ITodoViewModel) {
+  public completeTodo(todo: ITodoViewModel): void {
     if (todo.status == Status.Overdue) {
       M.toast({ html: "Overdue task cannot be completed" });
       return;
@@ -50,17 +50,16 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  private getTodos() {
+  private getTodos(): void {
     this.subscription.unsubscribe();
     this.subscription = this.todoService.getTodos().subscribe((todos: ITodo[]) => {
-      var sortedByDate = todos.sort(this.sortByDateDescending);
-      this.todos = sortedByDate.map((t: ITodo) => {
-        const status = this.statusService.getStatus(t.dueDate, t.isDone);
+      this.todos = todos.map((t: ITodo) => {
+        const status: Status = this.statusService.getStatus(t.dueDate, t.isDone);
         return {
           id: t.id,
           name: t.name,
           description: t.description,
-          dueDate: new Date(t.dueDate).toLocaleDateString() + " \n" + new Date(t.dueDate).toLocaleTimeString(),
+          dueDate: new Date(t.dueDate).toLocaleDateString() + " " + new Date(t.dueDate).toLocaleTimeString(),
           isDone: t.isDone,
           status,
           statusCss: this.statusService.getStatusCss(status)
@@ -69,11 +68,4 @@ export class TodoListComponent implements OnInit {
       console.log(this.todos);
     });
   }
-
-  private sortByDateDescending(a: any, b: any) {
-    var dateA = new Date(a.dueDate).getTime();
-    var dateB = new Date(b.dueDate).getTime();
-    return dateA > dateB ? -1 : 1;
-  }
-
 }

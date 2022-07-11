@@ -7,8 +7,8 @@ import * as moment from 'moment';
 })
 export class StatusService {
   public getStatus(taskDueDate: string, isCompleted: boolean): Status {
-    var duration = moment.duration(moment(taskDueDate).diff(moment()));
-    var hours = duration.asHours();
+    var duration: moment.Duration = moment.duration(moment(taskDueDate).diff(moment()));
+    var hours: number = duration.asHours();
 
     if (isCompleted) {
       return Status.Completed;

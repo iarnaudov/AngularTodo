@@ -21,11 +21,14 @@ export class HttpErrorHandlerInterceptor implements HttpInterceptor {
     }
 
     private handleError(userFriendlyMessage: string, error: HttpErrorResponse) {
-        if (userFriendlyMessage) {
+        if (error.status === 401) {
+            const unauthorizedMessage: string = "Unauthorized access. Please check you access token."
+            M.toast({ html: unauthorizedMessage })
+            console.error(unauthorizedMessage);
+        } else if (userFriendlyMessage) {
             M.toast({ html: userFriendlyMessage })
             console.error(userFriendlyMessage);
         }
-
         return throwError(() => error);
     };
 }
